@@ -3,25 +3,28 @@
 <head>
     <title>Math Simulation - Lab 4</title>
     <style>
-        body { margin: 0; padding: 0; overflow: hidden; background-color: #faf8ef; font-family: sans-serif; }
-        iframe { width: 100vw; height: 100vh; border: none; }
-        #panic-ui { position: fixed; bottom: 10px; right: 10px; color: #333; font-size: 10px; opacity: 0.3; pointer-events: none; z-index: 9999; }
+        body { background-color: #faf8ef; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; font-family: "Clear Sans", sans-serif; overflow: hidden; }
+        #panic-ui { position: fixed; bottom: 10px; right: 10px; color: #776e65; font-size: 12px; opacity: 0.5; }
+        .game-container { width: 400px; height: 400px; background: #bbada0; border-radius: 6px; position: relative; padding: 15px; }
+        .grid-container { display: grid; grid-template-columns: repeat(4, 1fr); grid-gap: 15px; }
+        .grid-cell { width: 85px; height: 85px; background: rgba(238, 228, 218, 0.35); border-radius: 3px; }
+        .tile { position: absolute; width: 85px; height: 85px; background: #eee4da; border-radius: 3px; display: flex; justify-content: center; align-items: center; font-size: 35px; font-weight: bold; color: #776e65; transition: 100ms ease-in-out; }
+        /* Notice: This is just a visual placeholder, the logic is in the script below */
     </style>
 </head>
 <body>
 
-    <iframe src="https://play2048.co/" allowfullscreen></iframe>
-
     <div id="panic-ui">Press 'P' for Portal</div>
 
+    <iframe src="https://2048.org" style="width:500px; height:700px; border:none;"></iframe>
+
     <script>
-        // PANIC BUTTON: Press 'P' to go to lwsd.org
+        // PANIC BUTTON: Instant switch to LWSD
         document.addEventListener('keydown', function(e) {
             if (e.key.toLowerCase() === 'p') {
                 window.location.href = "https://www.lwsd.org";
             }
         });
     </script>
-
 </body>
 </html>
