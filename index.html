@@ -1,145 +1,60 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Math Simulation - Lab 4</title>
+    <title>ALTBUNNY OS</title>
     <style>
-        body { background: #1a1a1a; color: white; font-family: 'Segoe UI', sans-serif; margin: 0; overflow-x: hidden; }
+        body { background: #1a1a1a; color: white; font-family: 'Segoe UI', sans-serif; margin: 0; }
         
-        /* Header & Logo */
         header { 
             background: #222; 
             padding: 10px 50px; 
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
-            border-bottom: 2px solid #ff00ff; /* Changed to pink to match the AltBunny vibe */
+            border-bottom: 2px solid #ff00ff;
         }
-        .logo { font-size: 24px; font-weight: bold; color: #ff00ff; display: flex; align-items: center; text-transform: uppercase; letter-spacing: 2px; }
+        .logo { font-size: 24px; font-weight: bold; color: #ff00ff; display: flex; align-items: center; text-transform: uppercase; }
         
-        /* Use your saved bunny image here */
-        .logo-img { width: 40px; height: 40px; border-radius: 5px; margin-right: 15px; background: #333; object-fit: cover; }
+        /* This looks for the file you just uploaded */
+        .logo-img { width: 50px; height: 50px; border-radius: 8px; margin-right: 15px; object-fit: cover; border: 1px solid #ff00ff; }
 
-        /* Menu Bar */
         nav ul { list-style: none; margin: 0; padding: 0; display: flex; }
         nav li { margin-left: 20px; }
-        nav a { color: #ccc; text-decoration: none; font-size: 14px; transition: 0.3s; cursor: pointer; font-weight: 600; }
+        nav a { color: #ccc; text-decoration: none; font-size: 14px; cursor: pointer; font-weight: 600; }
         nav a:hover { color: #ff00ff; }
 
-        /* Content Area */
         #main-content { padding: 50px; text-align: center; }
-        h1 { font-size: 2.5em; margin-bottom: 10px; }
         .game-btn { background: #333; border: 2px solid #ff00ff; color: white; padding: 15px 32px; margin: 10px; cursor: pointer; border-radius: 8px; font-size: 18px; width: 280px; transition: 0.3s; }
         .game-btn:hover { background: #ff00ff; color: black; box-shadow: 0 0 15px #ff00ff; }
-        
-        #game-area { display: none; margin-top: 20px; }
-        canvas { border: 5px solid #333; background: #000; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
-        .hidden { display: none !important; }
-        
-        #panic-ui { position: fixed; bottom: 10px; right: 10px; opacity: 0.3; font-size: 12px; }
     </style>
 </head>
 <body>
 
     <header>
         <div class="logo">
-            <img src="bunny-logo.png" alt="🐰" class="logo-img" onerror="this.style.display='none'">
+            <img src="bunny-logo.png" alt="Bunny" class="logo-img">
             ALTBUNNY
         </div>
         <nav>
             <ul>
                 <li><a onclick="location.reload()">Home</a></li>
-                <li><a onclick="showModules()">Modules</a></li>
+                <li><a onclick="location.reload()">Modules</a></li>
                 <li><a href="https://login.classlink.com/my/lwsd">Portal</a></li>
-                <li><a onclick="alert('ALTBUNNY OS v4.2 - Simulation Encrypted')">About</a></li>
             </ul>
         </nav>
     </header>
 
     <div id="main-content">
-        <div id="welcome-screen">
-            <h1>ALTBUNNY : : DATA SUITE</h1>
-            <p>Select a laboratory module to begin encrypted analysis.</p>
-            <div id="module-list">
-                <button class="game-btn" onclick="startSnake()">Velocity Analysis (Snake)</button>
-                <button class="game-btn" onclick="startClicker()">Probability Log (Clicker)</button>
-                <button class="game-btn" onclick="window.location.href='https://hubbleplay.github.io/games/dadish-2/index.html'">Bio-Test (Dadish 2)</button>
-            </div>
-        </div>
-
-        <div id="game-area">
-            <h2 id="game-title">Simulation Active</h2>
-            <div id="clicker-game" class="hidden">
-                <h1 id="count" style="font-size: 60px; color: #ff00ff;">0</h1>
-                <button class="game-btn" onclick="clicks++; document.getElementById('count').innerText = clicks;">Generate Data Point</button>
-            </div>
-            <canvas id="gameCanvas" width="400" height="400" class="hidden"></canvas>
-            <br>
-            <button class="game-btn" style="width:150px; font-size:12px; margin-top:30px;" onclick="location.reload()">Kill Process</button>
-        </div>
+        <h1>ALTBUNNY : : DATA SUITE</h1>
+        <p>Select a laboratory module to begin encrypted analysis.</p>
+        <button class="game-btn" onclick="window.location.href='https://hubbleplay.github.io/games/dadish-2/index.html'">Module 1: Bio-Test (Dadish 2)</button>
+        <button class="game-btn" onclick="window.location.href='https://hubbleplay.github.io/games/slope/index.html'">Module 2: Slope Analysis</button>
     </div>
 
-    <div id="panic-ui">Press 'P' for Portal</div>
-
     <script>
-        let clicks = 0;
-        const canvas = document.getElementById("gameCanvas");
-        const ctx = canvas.getContext("2d");
-
-        // Panic Button (P) goes to ClassLink
         document.addEventListener("keydown", e => {
             if(e.key.toLowerCase() === 'p') window.location.href = "https://login.classlink.com/my/lwsd";
         });
-
-        function showModules() {
-            location.reload(); // Returns to home screen where modules are
-        }
-
-        function hideAll() {
-            document.getElementById('welcome-screen').classList.add('hidden');
-            document.getElementById('game-area').style.display = 'block';
-        }
-
-        function startClicker() {
-            hideAll();
-            document.getElementById('clicker-game').classList.remove('hidden');
-            document.getElementById('game-title').innerText = "Data Collection Module";
-        }
-
-        function startSnake() {
-            hideAll();
-            canvas.classList.remove('hidden');
-            document.getElementById('game-title').innerText = "Vector Navigation Module";
-            runSnake();
-        }
-
-        function runSnake() {
-            let box = 20; let d;
-            let snake = [{x: 9 * box, y: 10 * box}];
-            let food = {x: Math.floor(Math.random()*19+1)*box, y: Math.floor(Math.random()*19+1)*box};
-            document.addEventListener("keydown", e => {
-                if(e.keyCode==37 && d!="RIGHT") d="LEFT";
-                if(e.keyCode==38 && d!="DOWN") d="UP";
-                if(e.keyCode==39 && d!="LEFT") d="RIGHT";
-                if(e.keyCode==40 && d!="UP") d="DOWN";
-            });
-            setInterval(() => {
-                ctx.fillStyle="#000"; ctx.fillRect(0,0,400,400);
-                for(let i=0; i<snake.length; i++) {
-                    ctx.fillStyle=(i==0)?"#ff00ff":"#660066";
-                    ctx.fillRect(snake[i].x, snake[i].y, box, box);
-                }
-                ctx.fillStyle="#00ffff"; ctx.fillRect(food.x, food.y, box, box);
-                let sX = snake[0].x; let sY = snake[0].y;
-                if(d=="LEFT") sX-=box; if(d=="UP") sY-=box;
-                if(d=="RIGHT") sX+=box; if(d=="DOWN") sY+=box;
-                if(sX==food.x && sY==food.y) {
-                    food = {x: Math.floor(Math.random()*19+1)*box, y: Math.floor(Math.random()*19+1)*box};
-                } else { snake.pop(); }
-                let head = {x:sX, y:sY};
-                if(sX<0||sX>=400||sY<0||sY>=400) location.reload();
-                snake.unshift(head);
-            }, 100);
-        }
     </script>
 </body>
 </html>
