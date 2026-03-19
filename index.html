@@ -3,50 +3,95 @@
 <head>
     <title>Math Simulation - Lab 4</title>
     <style>
-        body { background: #1a1a1a; color: white; font-family: sans-serif; text-align: center; margin: 0; }
-        #menu { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
-        h1 { color: #4CAF50; margin-bottom: 20px; }
-        .game-btn { 
-            background: #333; 
-            border: 2px solid #4CAF50; 
-            color: white; 
-            padding: 15px 32px; 
-            margin: 10px; 
-            cursor: pointer; 
-            border-radius: 8px; 
-            font-size: 18px; 
-            width: 320px; 
-            text-decoration: none;
-            transition: 0.3s;
+        /* General Styles */
+        body { background: #1a1a1a; color: white; font-family: 'Segoe UI', sans-serif; margin: 0; }
+        
+        /* Header & Logo */
+        header { 
+            background: #222; 
+            padding: 10px 50px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 2px solid #4CAF50;
         }
+        .logo { font-size: 24px; font-weight: bold; color: #4CAF50; display: flex; align-items: center; }
+        .logo-icon { width: 30px; height: 30px; background: #4CAF50; border-radius: 50%; margin-right: 10px; }
+
+        /* Menu Bar */
+        nav ul { list-style: none; margin: 0; padding: 0; display: flex; }
+        nav li { margin-left: 20px; }
+        nav a { color: #ccc; text-decoration: none; font-size: 14px; transition: 0.3s; cursor: pointer; }
+        nav a:hover { color: #4CAF50; }
+
+        /* Content Area */
+        #main-content { padding: 50px; text-align: center; }
+        .game-btn { background: #333; border: 2px solid #4CAF50; color: white; padding: 15px 32px; margin: 10px; cursor: pointer; border-radius: 8px; font-size: 18px; width: 280px; }
         .game-btn:hover { background: #4CAF50; color: black; }
+        
+        #game-area { display: none; margin-top: 20px; }
+        canvas { border: 5px solid #333; background: #000; }
+        .hidden { display: none !important; }
+        
         #panic-ui { position: fixed; bottom: 10px; right: 10px; opacity: 0.3; font-size: 12px; }
     </style>
 </head>
 <body>
 
-    <div id="menu">
-        <h1>Laboratory Modules</h1>
-        
-        <button class="game-btn" onclick="window.location.href='https://hubbleplay.github.io/games/dadish-2/index.html'">Module 1: Bio-Test (Dadish 2)</button>
-        
-        <button class="game-btn" onclick="window.location.href='https://hubbleplay.github.io/games/slope/index.html'">Module 2: Slope Analysis</button>
-        
-        <button class="game-btn" onclick="window.location.href='https://hubbleplay.github.io/games/basket-random/index.html'">Module 3: Physics Test</button>
+    <header>
+        <div class="logo">
+            <div class="logo-icon"></div>
+            LWSD Lab
+        </div>
+        <nav>
+            <ul>
+                <li><a onclick="location.reload()">Home</a></li>
+                <li><a onclick="showSection('modules')">Modules</a></li>
+                <li><a href="https://www.lwsd.org" target="_blank">Portal</a></li>
+                <li><a onclick="alert('Lab Version 4.0.2 - Simulation Active')">About</a></li>
+            </ul>
+        </nav>
+    </header>
 
-        <button class="game-btn" onclick="window.location.href='https://banib4813-lab.github.io/altbunny/'">Module 4: Reset / Snake</button>
+    <div id="main-content">
+        <div id="welcome-screen">
+            <h1>Welcome to the Math Analysis Suite</h1>
+            <p>Please select a laboratory module from the menu or the buttons below.</p>
+            <button class="game-btn" onclick="startSnake()">Run Velocity Test (Snake)</button>
+            <button class="game-btn" onclick="startClicker()">Run Data Collection (Clicker)</button>
+        </div>
 
-        <p style="opacity: 0.5; margin-top: 20px;">Select a module to begin simulation.</p>
+        <div id="game-area">
+            <h2 id="game-title">Simulation Active</h2>
+            <div id="clicker-game" class="hidden">
+                <h1 id="count" style="font-size: 48px;">0</h1>
+                <button class="game-btn" onclick="clicks++; document.getElementById('count').innerText = clicks;">Generate Data Point</button>
+            </div>
+            <canvas id="gameCanvas" width="400" height="400" class="hidden"></canvas>
+            <br>
+            <button class="game-btn" style="width:150px; font-size:12px;" onclick="location.reload()">End Session</button>
+        </div>
     </div>
 
     <div id="panic-ui">Press 'P' for Portal</div>
 
     <script>
-        document.addEventListener("keydown", function(e) {
-            if(e.key.toLowerCase() === 'p') {
-                window.location.href = "https://www.lwsd.org";
-            }
+        let clicks = 0;
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+
+        // Panic Button
+        document.addEventListener("keydown", e => {
+            if(e.key.toLowerCase() === 'p') window.location.href = "https://www.lwsd.org";
         });
-    </script>
-</body>
-</html>
+
+        function hideAll() {
+            document.getElementById('welcome-screen').classList.add('hidden');
+            document.getElementById('game-area').style.display = 'block';
+        }
+
+        function startClicker() {
+            hideAll();
+            document.getElementById('clicker-game').classList.remove('hidden');
+            document.getElementById('game-title').innerText = "Data Collection Module";
+        }
