@@ -3,11 +3,11 @@
 <head>
     <title>Math Simulation - Lab 4</title>
     <style>
-        body { background: #1a1a1a; color: white; font-family: sans-serif; text-align: center; margin: 0; overflow: hidden; }
+        body { background: #1a1a1a; color: white; font-family: sans-serif; text-align: center; margin: 0; }
         #menu { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
-        .game-btn { background: #333; border: 2px solid #4CAF50; color: white; padding: 15px 32px; margin: 10px; cursor: pointer; border-radius: 8px; font-size: 18px; width: 320px; transition: 0.3s; }
+        h1 { color: #4CAF50; }
+        .game-btn { background: #333; border: 2px solid #4CAF50; color: white; padding: 15px 32px; margin: 10px; cursor: pointer; border-radius: 8px; font-size: 18px; width: 320px; text-decoration: none; display: inline-block; transition: 0.3s; }
         .game-btn:hover { background: #4CAF50; color: black; }
-        iframe { width: 100vw; height: 100vh; border: none; display: none; }
         #panic-ui { position: fixed; bottom: 10px; right: 10px; opacity: 0.3; font-size: 12px; pointer-events: none; }
     </style>
 </head>
@@ -15,26 +15,18 @@
 
     <div id="menu">
         <h1>Laboratory Modules</h1>
-        <button class="game-btn" onclick="location.reload()">Module 1: Reset / Snake</button>
         
-        <button class="game-btn" onclick="loadGame('https://images-opensocial.googleusercontent.com/gadgets/proxy?container=fb&url=https://hubbleplay.github.io/games/dadish-2/index.html')">Module 2: Dadish 2 (Platforming)</button>
-        <button class="game-btn" onclick="loadGame('https://images-opensocial.googleusercontent.com/gadgets/proxy?container=fb&url=https://hubbleplay.github.io/games/slope/index.html')">Module 3: Slope Analysis</button>
-        <button class="game-btn" onclick="loadGame('https://images-opensocial.googleusercontent.com/gadgets/proxy?container=fb&url=https://hubbleplay.github.io/games/basket-random/index.html')">Module 4: Physics Test</button>
-        
+        <a href="https://images-opensocial.googleusercontent.com/gadgets/proxy?container=fb&url=https://hubbleplay.github.io/games/dadish/index.html" class="game-btn">Module 1: Dadish 1 (Bio-Test)</a>
+        <a href="https://images-opensocial.googleusercontent.com/gadgets/proxy?container=fb&url=https://hubbleplay.github.io/games/dadish-2/index.html" class="game-btn">Module 2: Dadish 2 (Bio-Test)</a>
+        <a href="https://images-opensocial.googleusercontent.com/gadgets/proxy?container=fb&url=https://hubbleplay.github.io/games/slope/index.html" class="game-btn">Module 3: Slope Analysis</a>
+        <a href="https://images-opensocial.googleusercontent.com/gadgets/proxy?container=fb&url=https://hubbleplay.github.io/games/basket-random/index.html" class="game-btn">Module 4: Physics Test</a>
+
         <p style="opacity: 0.5; margin-top: 20px;">Select a module to begin simulation.</p>
     </div>
 
-    <iframe id="game-frame" src=""></iframe>
     <div id="panic-ui">Press 'P' for Portal</div>
 
     <script>
-        function loadGame(url) {
-            document.getElementById('menu').style.display = 'none';
-            const frame = document.getElementById('game-frame');
-            frame.src = url;
-            frame.style.display = 'block';
-        }
-
         // Global Panic Button
         document.addEventListener("keydown", function(e) {
             if(e.key.toLowerCase() === 'p') {
