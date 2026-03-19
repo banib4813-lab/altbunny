@@ -3,28 +3,65 @@
 <head>
     <title>Math Simulation - Lab 4</title>
     <style>
-        body { background-color: #faf8ef; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; font-family: "Clear Sans", sans-serif; overflow: hidden; }
-        #panic-ui { position: fixed; bottom: 10px; right: 10px; color: #776e65; font-size: 12px; opacity: 0.5; }
-        .game-container { width: 400px; height: 400px; background: #bbada0; border-radius: 6px; position: relative; padding: 15px; }
-        .grid-container { display: grid; grid-template-columns: repeat(4, 1fr); grid-gap: 15px; }
-        .grid-cell { width: 85px; height: 85px; background: rgba(238, 228, 218, 0.35); border-radius: 3px; }
-        .tile { position: absolute; width: 85px; height: 85px; background: #eee4da; border-radius: 3px; display: flex; justify-content: center; align-items: center; font-size: 35px; font-weight: bold; color: #776e65; transition: 100ms ease-in-out; }
-        /* Notice: This is just a visual placeholder, the logic is in the script below */
+        body { background: #1a1a1a; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; color: white; font-family: sans-serif; }
+        canvas { border: 5px solid #333; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
+        #panic-ui { position: fixed; bottom: 10px; right: 10px; opacity: 0.3; font-size: 12px; }
+        .score { position: fixed; top: 20px; font-size: 24px; }
     </style>
 </head>
 <body>
-
+    <div class="score" id="score">Score: 0</div>
+    <canvas id="snake" width="400" height="400"></canvas>
     <div id="panic-ui">Press 'P' for Portal</div>
 
-    <iframe src="https://2048.org" style="width:500px; height:700px; border:none;"></iframe>
-
     <script>
-        // PANIC BUTTON: Instant switch to LWSD
-        document.addEventListener('keydown', function(e) {
-            if (e.key.toLowerCase() === 'p') {
-                window.location.href = "https://www.lwsd.org";
+        const canvas = document.getElementById("snake");
+        const ctx = canvas.getContext("2d");
+        const box = 20;
+        let score = 0;
+        let snake = [{x: 9 * box, y: 10 * box}];
+        let food = { x: Math.floor(Math.random() * 19 + 1) * box, y: Math.floor(Math.random() * 19 + 1) * box };
+        let d;
+
+        document.addEventListener("keydown", direction);
+        function direction(event) {
+            if(event.keyCode == 37 && d != "RIGHT") d = "LEFT";
+            else if(event.keyCode == 38 && d != "DOWN") d = "UP";
+            else if(event.keyCode == 39 && d != "LEFT") d = "RIGHT";
+            else if(event.keyCode == 40 && d != "UP") d = "DOWN";
+            // PANIC BUTTON
+            if(event.key.toLowerCase() === 'p') window.location.href = "https://www.lwsd.org";
+        }
+
+        function draw() {
+            ctx.fillStyle = "#1a1a1a";
+            ctx.fillRect(0, 0, 400, 400);
+            for(let i = 0; i < snake.length; i++) {
+                ctx.fillStyle = (i == 0) ? "#4CAF50" : "#8BC34A";
+                ctx.fillRect(snake[i].x, snake[i].y, box, box);
             }
-        });
+            ctx.fillStyle = "#FF5252";
+            ctx.fillRect(food.x, food.y, box, box);
+            let snakeX = snake[0].x;
+            let snakeY = snake[0].y;
+            if( d == "LEFT") snakeX -= box;
+            if( d == "UP") snakeY -= box;
+            if( d == "RIGHT") snakeX += box;
+            if( d == "DOWN") snakeY += box;
+            if(snakeX == food.x && snakeY == food.y) {
+                score++;
+                document.getElementById("score").innerHTML = "Score: " + score;
+                food = { x: Math.floor(Math.random() * 19 + 1) * box, y: Math.floor(Math.random() * 19 + 1) * box };
+            } else { snake.pop(); }
+            let newHead = { x: snakeX, y: snakeY };
+            if(snakeX < 0 || snakeX >= 400 || snakeY < 0 || snakeY >= 400 || collision(newHead, snake)) { clearInterval(game); location.reload(); }
+            snake.unshift(newHead);
+        }
+        function collision(head, array) {
+            for(let i = 0; i < array.length; i++) { if(head.x == array[i].x && head.y == array[i].y) return true; }
+            return false;
+        }
+        let game = setInterval(draw, 100);
     </script>
 </body>
 </html>
