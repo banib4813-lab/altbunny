@@ -4,20 +4,24 @@
     <title>Math Simulation - Lab 4</title>
     <style>
         body { background: #1a1a1a; color: white; font-family: sans-serif; text-align: center; margin: 0; overflow: hidden; }
-        #menu { padding: 50px; }
-        .game-btn { background: #4CAF50; border: none; color: white; padding: 15px 32px; margin: 10px; cursor: pointer; border-radius: 8px; font-size: 16px; }
-        .game-btn:hover { background: #45a049; }
+        #menu { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
+        .game-btn { background: #333; border: 2px solid #4CAF50; color: white; padding: 15px 32px; margin: 10px; cursor: pointer; border-radius: 8px; font-size: 18px; width: 320px; transition: 0.3s; }
+        .game-btn:hover { background: #4CAF50; color: black; }
         iframe { width: 100vw; height: 100vh; border: none; display: none; }
-        #panic-ui { position: fixed; bottom: 10px; right: 10px; opacity: 0.3; font-size: 12px; }
+        #panic-ui { position: fixed; bottom: 10px; right: 10px; opacity: 0.3; font-size: 12px; pointer-events: none; }
     </style>
 </head>
 <body>
 
     <div id="menu">
-        <h1>Select Laboratory Module</h1>
-        <button class="game-btn" onclick="loadGame('https://images-opensocial.googleusercontent.com/gadgets/proxy?container=fb&url=https://hubbleplay.github.io/games/slope/index.html')">Module 1: Slope Analysis</button>
-        <button class="game-btn" onclick="loadGame('https://images-opensocial.googleusercontent.com/gadgets/proxy?container=fb&url=https://hubbleplay.github.io/games/1v1lol/index.html')">Module 2: Structural Geometry</button>
-        <button class="game-btn" onclick="location.reload()">Module 3: Reset to Snake</button>
+        <h1>Laboratory Modules</h1>
+        <button class="game-btn" onclick="location.reload()">Module 1: Reset / Snake</button>
+        
+        <button class="game-btn" onclick="loadGame('https://images-opensocial.googleusercontent.com/gadgets/proxy?container=fb&url=https://hubbleplay.github.io/games/dadish-2/index.html')">Module 2: Dadish 2 (Platforming)</button>
+        <button class="game-btn" onclick="loadGame('https://images-opensocial.googleusercontent.com/gadgets/proxy?container=fb&url=https://hubbleplay.github.io/games/slope/index.html')">Module 3: Slope Analysis</button>
+        <button class="game-btn" onclick="loadGame('https://images-opensocial.googleusercontent.com/gadgets/proxy?container=fb&url=https://hubbleplay.github.io/games/basket-random/index.html')">Module 4: Physics Test</button>
+        
+        <p style="opacity: 0.5; margin-top: 20px;">Select a module to begin simulation.</p>
     </div>
 
     <iframe id="game-frame" src=""></iframe>
@@ -31,8 +35,11 @@
             frame.style.display = 'block';
         }
 
+        // Global Panic Button
         document.addEventListener("keydown", function(e) {
-            if(e.key.toLowerCase() === 'p') window.location.href = "https://www.lwsd.org";
+            if(e.key.toLowerCase() === 'p') {
+                window.location.href = "https://www.lwsd.org";
+            }
         });
     </script>
 </body>
