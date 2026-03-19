@@ -63,15 +63,6 @@
             text-shadow: 0 0 10px #fff, 0 0 20px #ff00ff, 0 0 40px #ff00ff, 0 0 80px #ff00ff, 0 0 120px #ff00ff;
         }
 
-        .console-status {
-            margin-top: 20px;
-            font-family: 'Courier New', monospace;
-            color: #00ffff;
-            font-size: 1em;
-            letter-spacing: 4px;
-            opacity: 0.8;
-        }
-
         #modules-page {
             display: none;
             position: fixed;
@@ -89,9 +80,6 @@
             grid-template-columns: 1fr 1fr;
             gap: 15px;
             margin-top: 20px;
-            max-height: 70vh;
-            overflow-y: auto;
-            padding: 20px;
         }
 
         .game-card {
@@ -108,7 +96,7 @@
             text-align: center;
             transition: 0.3s;
         }
-        .game-card:hover { background: #ff00ff; color: black; box-shadow: 0 0 25px #ff00ff; transform: scale(1.05); }
+        .game-card:hover { background: #ff00ff; color: black; box-shadow: 0 0 25px #ff00ff; }
 
         #panic-ui { position: fixed; bottom: 15px; right: 20px; opacity: 0.4; font-size: 11px; color: #ff00ff; font-weight: bold; z-index: 1000; }
     </style>
@@ -133,22 +121,19 @@
 
     <div id="main-ui">
         <h1 class="neon-text">ALTBUNNY</h1>
-        <p class="console-status">> BYPASS_TERMINAL: ONLINE</p>
     </div>
 
     <div id="modules-page">
-        <h2 style="color: #ff00ff; font-size: 2.5em; margin-bottom: 10px; letter-spacing: 5px;">ACTIVE_MODULES</h2>
+        <h2 style="color: #ff00ff; font-size: 2.5em; margin-bottom: 20px; letter-spacing: 5px;">ACTIVE_MODULES</h2>
         <div class="game-grid">
-            <div class="game-card" onclick="location.href='https://hubbleplay.github.io/games/dadish-2/'">Dadish 2</div>
-            <div class="game-card" onclick="location.href='https://hubbleplay.github.io/games/slope/'">Slope</div>
-            <div class="game-card" onclick="location.href='https://hubbleplay.github.io/games/basket-random/'">Basket Random</div>
-            <div class="game-card" onclick="location.href='https://hubbleplay.github.io/games/1v1lol/'">1v1.LOL</div>
-            <div class="game-card" onclick="location.href='https://hubbleplay.github.io/games/snow-rider-3d/'">Snow Rider 3D</div>
-            <div class="game-card" onclick="location.href='https://hubbleplay.github.io/games/retro-bowl/'">Retro Bowl</div>
-            <div class="game-card" onclick="location.href='https://hubbleplay.github.io/games/appel/'">Appel</div>
-            <div class="game-card" onclick="location.href='https://hubbleplay.github.io/games/bitlife/'">Bitlife</div>
+            <div class="game-card" onclick="location.href='https://hubbleplay.github.io/games/dadish-2/index.html'">Dadish 2</div>
+            <div class="game-card" onclick="location.href='https://hubbleplay.github.io/games/slope/index.html'">Slope</div>
+            <div class="game-card" onclick="location.href='https://hubbleplay.github.io/games/1v1lol/index.html'">1v1.LOL</div>
+            <div class="game-card" onclick="location.href='https://hubbleplay.github.io/games/appel/index.html'">Appel</div>
+            <div class="game-card" onclick="location.href='https://hubbleplay.github.io/games/snow-rider-3d/index.html'">Snow Rider 3D</div>
+            <div class="game-card" onclick="location.href='https://hubbleplay.github.io/games/retro-bowl/index.html'">Retro Bowl</div>
         </div>
-        <p style="margin-top: 30px; color: #555; cursor: pointer; font-weight: bold;" onclick="closeModules()">[ EXIT_TERMINAL ]</p>
+        <p style="margin-top: 40px; color: #555; cursor: pointer;" onclick="closeModules()">[ EXIT ]</p>
     </div>
 
     <div id="panic-ui">EMERGENCY 'P' ARMED</div>
