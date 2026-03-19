@@ -5,50 +5,47 @@
     <style>
         body { background: #1a1a1a; color: white; font-family: sans-serif; text-align: center; margin: 0; }
         #menu { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
-        .game-btn { background: #333; border: 2px solid #4CAF50; color: white; padding: 15px 32px; margin: 10px; cursor: pointer; border-radius: 8px; font-size: 18px; width: 320px; transition: 0.3s; }
+        h1 { color: #4CAF50; margin-bottom: 20px; }
+        .game-btn { 
+            background: #333; 
+            border: 2px solid #4CAF50; 
+            color: white; 
+            padding: 15px 32px; 
+            margin: 10px; 
+            cursor: pointer; 
+            border-radius: 8px; 
+            font-size: 18px; 
+            width: 320px; 
+            text-decoration: none;
+            transition: 0.3s;
+        }
         .game-btn:hover { background: #4CAF50; color: black; }
-        #game-container { display: none; padding: 20px; }
-        iframe { width: 100vw; height: 80vh; border: none; background: white; }
         #panic-ui { position: fixed; bottom: 10px; right: 10px; opacity: 0.3; font-size: 12px; }
-        .hidden { display: none !important; }
     </style>
 </head>
 <body>
 
     <div id="menu">
         <h1>Laboratory Modules</h1>
-        <button class="game-btn" onclick="loadDadish()">Module 1: Dadish (Bio-Test)</button>
-        <button class="game-btn" onclick="loadSlope()">Module 2: Slope Analysis</button>
-        <button class="game-btn" onclick="location.reload()">Module 3: Reset / Snake</button>
-        <p style="opacity: 0.5;">Select a module to begin simulation.</p>
-    </div>
+        
+        <button class="game-btn" onclick="window.location.href='https://hubbleplay.github.io/games/dadish-2/index.html'">Module 1: Bio-Test (Dadish 2)</button>
+        
+        <button class="game-btn" onclick="window.location.href='https://hubbleplay.github.io/games/slope/index.html'">Module 2: Slope Analysis</button>
+        
+        <button class="game-btn" onclick="window.location.href='https://hubbleplay.github.io/games/basket-random/index.html'">Module 3: Physics Test</button>
 
-    <div id="game-container">
-        <h2 id="game-title">Simulation Active</h2>
-        <embed id="game-embed" src="" style="width:90vw; height:70vh; border:3px solid #4CAF50; border-radius:10px;"></embed>
-        <br><button class="game-btn" style="width:150px; font-size:12px; margin-top:20px;" onclick="location.reload()">Back to Menu</button>
+        <button class="game-btn" onclick="window.location.href='https://banib4813-lab.github.io/altbunny/'">Module 4: Reset / Snake</button>
+
+        <p style="opacity: 0.5; margin-top: 20px;">Select a module to begin simulation.</p>
     </div>
 
     <div id="panic-ui">Press 'P' for Portal</div>
 
     <script>
-        function loadDadish() {
-            document.getElementById('menu').classList.add('hidden');
-            document.getElementById('game-container').style.display = 'block';
-            document.getElementById('game-title').innerText = "Module 1: Bio-Test";
-            // This link uses a direct CDN which is harder to block than the main site
-            document.getElementById('game-embed').src = "https://cdn.jsdelivr.net/gh/hubbleplay/hubbleplay.github.io/games/dadish/index.html";
-        }
-
-        function loadSlope() {
-            document.getElementById('menu').classList.add('hidden');
-            document.getElementById('game-container').style.display = 'block';
-            document.getElementById('game-title').innerText = "Module 2: Slope Analysis";
-            document.getElementById('game-embed').src = "https://cdn.jsdelivr.net/gh/hubbleplay/hubbleplay.github.io/games/slope/index.html";
-        }
-
         document.addEventListener("keydown", function(e) {
-            if(e.key.toLowerCase() === 'p') window.location.href = "https://www.lwsd.org";
+            if(e.key.toLowerCase() === 'p') {
+                window.location.href = "https://www.lwsd.org";
+            }
         });
     </script>
 </body>
